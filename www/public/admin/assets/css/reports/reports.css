@@ -1,0 +1,46 @@
+.dataTables_filter {
+    text-align: right;
+}
+.dataTables_filter input[type=search]{
+    margin-top: 5px;
+    margin-right: 10px;
+    right: 10px;
+}
+.buttons-excel {
+    margin: 15px 0;
+}
+.cell-diff {
+    background-color: rgb(0 125 255 / 15%);
+}
+thead tr:first-child th {
+    position: sticky;
+    z-index: 12;
+    top: 0;
+    background: white;
+}
+.hidden {
+    display: none;
+}
+.table-fixed {
+    table-layout: fixed;
+    width: 100%;
+}
+.table-fixed th, .table-fixed td {
+    width: 33.33%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.table-report-loja th,
+.table-report-loja td {
+    width: 25% !important;
+    white-space: nowrap;
+    text-align: center;
+}
+.table-report-loja-select th,
+.table-report-loja-select td,
+.table-report-loja-select a {
+    width: 25% !important;
+    white-space: nowrap;
+    text-align: center;
+}

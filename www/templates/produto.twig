@@ -1,0 +1,10 @@
+{% extends "geral.twig" %}
+
+{% block titulo %}{{ produto.nome }} - Minha Loja Online{% endblock %}
+
+{% block conteudo %}
+    <h1>{{ produto.nome }}</h1>
+    <p>Descrição: {{ produto.descricao }}</p>
+    <p>Preço: R$ {{ produto.preco }}</p>
+    <a href="/index.php">Voltar</a>
+{% endblock %}

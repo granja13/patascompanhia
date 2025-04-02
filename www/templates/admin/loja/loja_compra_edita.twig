@@ -1,0 +1,220 @@
+{% extends "template.twig" %}
+{% block title %}{{ breadcrumbs['itens']['label'] }}{% endblock %}
+
+{% block links %}
+
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="row">
+        <!-- Encomenda -->
+        <div class="col-sm-4 d-flex align-items-stretch">
+          <div class="card card-outline w-100">
+            <div class="card-header p-2">
+              <h6 class="text-center mb-0">Encomenda</h6>
+            </div>
+            <form action="loja_compra_edita.php?id={{ encomendas.id }}" method="post">
+              <div class="card-body p-2">
+                <input type="hidden" name="id" value="{{ encomendas.id }}">
+
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label text-right">ID Encomenda:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" value="{{ encomendas.id }}" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label text-right">Status:</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="status">
+                      {% for status in detalhe_status %}
+                        <option value="{{ status.id_status }}" {% if encomendas.status == status.id_status %}selected{% endif %}>
+                          {{ status.id_status }} - {{ status.nome }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label text-right">Tracking NR:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" name="tracking_nr" value="{{ encomendas.envio }}">
+                  </div>
+                </div>
+                <button class="btn btn-info" type="submit"><i class="fas fa-plus"></i> Alterar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Detalhes de Pagamento -->
+        <div class="col-sm-4 d-flex align-items-stretch">
+          <div class="card card-outline w-100">
+            <div class="card-header p-2">
+              <h6 class="text-cente mb-0">
+                Detalhes de Pagamento (<strong>{{ encomendas.envio_pagamento }}</strong>)
+                {% if encomendas.pago == 0 %}
+                  <span class="badge badge-pill badge-danger pull-right">NÃO PAGO</span>
+                {% else %}
+                  <span class="badge badge-pill badge-success pull-right">PAGO</span>
+                {% endif %}
+              </h6>
+            </div>
+            <div class="card-body p-2">
+              <div class="row">
+                <div class="col-4">
+                  <img src="../../../www/public/assets/imagens/pagamentos/{{ encomendas.envio_pagamento }}.png" width="100px" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="col-8">
+                  Pagamento por {{ encomendas.envio_pagamento }}
+                </div>
+
+                {% if encomendas.envio_pagamento == "Multibanco" %}
+                  {% set module_info = encomendas.module_info|split('|') %}
+                  <div class="col-6">Entidade:</div>
+                  <div class="col-6">{{ module_info[0] }}</div>
+                  <div class="col-6">Referencia:</div>
+                  <div class="col-6">{{ module_info[1] }}</div>
+                  <div class="col-6">Montante:</div>
+                  <div class="col-6">{{ module_info[2] }}€</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Envio -->
+        <div class="col-sm-4 d-flex align-items-stretch">
+          <div class="card card-outline w-100">
+            <div class="card-header p-2">
+              <h6 class="text-center mb-0">
+                Envio (<strong>{{ encomendas.envio_tipo }}</strong>)
+              </h6>
+            </div>
+            <div class="card-body p-2">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label text-right">Nome:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" value="{{ encomendas.nome }}" disabled="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label text-right">Morada:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" value="{{ encomendas.rua }}" disabled="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label text-right">Cidade:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" value="{{ encomendas.cidade }}" disabled="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label text-right">Codigo Postal:</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" value="{{ encomendas.cod_postal }}" disabled="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produtos da Encomenda -->
+      <div class="col-12">
+        <div class="invoice p-3 mb-3">
+
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Imagem</th>
+                    <th>Referencia</th>
+                    <th>QTD</th>
+                    <th>Produto</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for produto in encomendas_detalhe %}
+                    <tr>
+                      <td>
+                        <img class='mycss' style="height: 100px" src="../../../www/public/assets/imagens/produtos/{{ produto.img }}"><br><br>
+                      </td>
+                      <td>{{ produto.referencia }}</td>
+                      <td>{{ produto.qty }}</td>
+                      <td>{{ produto.nome }}</td>
+                      <td>{{ produto.preco_enc }}€</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Totais -->
+          <div class="row">
+            <div class="col-6">
+            </div>
+
+            <div class="col-6">
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <th style="width:50%">Total:</th>
+                      <td>{{ encomendas.total }}€</td>
+                    </tr>
+                    <tr>
+                      <th>Portes</th>
+                      <td>{{ encomendas.portes }}€</td>
+                    </tr>
+                    <tr>
+                      <th>Peso:</th>
+                      <td>{{ encomendas.peso }}Kg</td>
+                    </tr>
+                    <tr>
+                      <th>Total Encomenda:</th>
+                      <td>{{ (encomendas.total + encomendas.portes) }}€</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/loja/loja_compra.js"></script>
+ 
+{% endblock %}

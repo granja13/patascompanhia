@@ -1,0 +1,211 @@
+
+
+#main_menu nav li.nav-item {
+    width: 230px;
+}
+
+#btnBackToTop {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 99;
+    border: 1px solid #c2c7d0;
+    background-color: #ffffff;
+    color: #6c757d;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 22px;
+    opacity: 0.8;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+}
+
+#btnBackToTop:hover {
+    opacity: 1;
+}
+
+table.table > tbody > tr > td {
+    vertical-align: middle !important;
+}
+
+table.table > tbody > tr > td:last-child {
+    white-space: nowrap;
+    width: 5% !important;
+    text-align: center;
+}
+
+table.table > tbody > tr > td:last-child > a + a {
+    margin-left: 10px;
+}
+
+table.table > tbody > tr > td:last-child > button.btn {
+    height: 42px;
+    width: 42px;
+}
+
+.bootstrap-datetimepicker-widget table tr {
+    background-color: transparent !important;
+}
+
+.bootstrap-datetimepicker-widget table th,
+.bootstrap-datetimepicker-widget table td {
+    padding: 0px !important;
+}
+
+.bootstrap-datetimepicker-widget .datepicker-days table td {
+    padding: 0.3rem !important;
+}
+
+.nav-tabs .nav-link.is-invalid {
+    border-color: #dc3545 #dc3545 #ffffff !important;
+}
+
+.tab-content .container-fluid {
+    padding: 20px;
+}
+
+.card .card-header .card-title {
+    font-size: 25px;
+}
+
+.card .card-body legend {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.grabbable {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+}
+
+.grabbable:active {
+    cursor: grabbing;
+}
+
+.btn.btn-xs {
+    height: 22px;
+    width: 22px;
+    text-align: center;
+}
+
+.select2bs4_tags + .select2-container--bootstrap4.select2-container--focus .select2-selection {
+    border: 1px solid #ced4da;
+    -webkit-box-shadow: none;
+    box-shadow:  none;
+}
+
+.select2bs4_tags + .select2-container--bootstrap4.select2-container--focus.select2-container--open .select2-selection {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.CodeMirror {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+/*
+@TODO REMOVER AS CLASSES .label-info E PERCEBER POR QUE NÃO FOI POSSÍVEL CARREGAR O bootstrap.min SEM QUE OS CONTEÚDOS DOS SEPARADORES FICASSEM BRANCOS.
+ */
+.label-info {
+    background-color: #007bff;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+.label-info span {
+    font-weight: bold;
+}
+
+/* @TODO Fazer funcionar o scroll igual ao template original. */
+aside .sidebar .os-viewport {
+    overflow-y: auto;
+}
+
+.note-editor.note-frame.fullscreen {
+    background-color: white;
+}
+
+.table th.date-field {
+    min-width: 60px;
+}
+
+.jcrop-edit .jcrop-editor, .jcrop-edit .jcrop-save, .jcrop-edit .preview-block, label.jcrop-image-title {
+    display: none;
+}
+
+.jcrop-edit .image_color.noimg {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+}
+.jcrop-edit .image_color img {
+    width: 100%;
+    height: 100%;
+}
+.jcrop-edit .imgtojcrop {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+.jcrop-edit .imgtojcrop .exist-img-thumb {
+    padding: 3px;
+    border: solid 1px #eeeeee;
+}
+.jcrop-edit .imgtojcrop .exist-img-thumb.active {
+    border: solid 1px #000;
+}
+.dataTables_wrapper {
+    position: relative;
+}
+.dataTables_processing {
+    background-color: #00000075;
+    border: none;
+    padding: 0px;
+    color: #ffffff;
+    font-size: 60px;
+    width: auto !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    border-radius: 0 !important;
+}
+.dataTables_processing i{
+    position: sticky;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+#main_menu .nav .nav-item .new-feature {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%) rotate(270deg);
+}
+.tab-content .tab-pane {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+.tr-disabled{
+    color: #ccc;
+}
+
+.tr-disabled img{
+    opacity: 0.2;
+}
+table.table.listcommand > tbody > tr > td.command{
+    cursor: pointer;
+}
+table.table.listcommand > tbody > tr > td:last-child {
+    width: auto !important;
+    text-align: left;
+}

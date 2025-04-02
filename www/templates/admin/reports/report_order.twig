@@ -1,0 +1,123 @@
+{% extends "template.twig" %}
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="get">
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label text-right" for="date_start">Início</label>
+                            <div class="col-sm-6">
+                                <div class="input-group date" id="datetime_start" data-target-input="nearest">
+                                    <input type="text" id="date_start" name="date_start" class="form-control datetimepicker-input" data-target="#datetime_start" value="{{ value_date_start }}" required>
+                                    <div class="input-group-append" data-target="#datetime_start" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label text-right" for="date_end">Fim</label>
+                            <div class="col-sm-6">
+                                <div class="input-group date" id="datetime_end" data-target-input="nearest">
+                                    <input type="text" id="date_end" name="date_end" class="form-control datetimepicker-input" data-target="#datetime_end" value="{{ value_date_end }}" required>
+                                    <div class="input-group-append" data-target="#datetime_end" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-right">
+                        <button id="filter_report" type="submit" class="btn btn-info text-right">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                {% for status, data in {'Total': total_encomenda, 'Total pagas': total_encomenda_paga, 'Total não pagas': total_encomenda_nao_paga} %}
+                    <div class="col-md-4 col-sm-4 col-6">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-{% if status == 'Total' %}info{% elseif status == 'Total pagas' %}success{% else %}danger{% endif %}">
+                                <i class="fas fa-euro-sign"></i>
+                            </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ status }} - <strong>{{ data.total_encomendas|default('0') }}</strong></span>
+                                <span class="info-box-number">{{ data.total_geral|default('0') }}€</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% for type, orders in {'Pago': total_encomenda_tipo_pago, 'Não pago': total_encomenda_tipo_nao_paga} %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-{% if type == 'Pago' %}success{% else %}danger{% endif %}">
+                            <div class="card-header">
+                                <h4 class="card-title">{{ type }} - <strong>{{ orders|length }}</strong></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    {% for order in orders %}
+                                        <div class="col-3">
+                                            <div class="card m-1 text-center">
+                                                <div class="title">
+                                                    <strong>{{ order.envio_pagamento }}</strong> - {{ order.total_encomendas }}
+                                                </div>
+                                                <div>
+                                                    <h3>{{ order.total_geral|number_format(2, '.', ' ') }}€</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .dataTables_filter {
+        text-align: right;
+    }
+    .dataTables_filter input[type=search] {
+        margin-top: 5px;
+        margin-right: 10px;
+        right: 10px;
+    }
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/reports/report_order.js"></script>
+
+    <script type="text/javascript">
+
+    function abrirModal(){
+        $('#modalMes').modal('show');
+    }
+    </script>
+{% endblock %}

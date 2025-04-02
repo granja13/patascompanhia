@@ -1,0 +1,59 @@
+{% extends "template.twig" %}
+{% block title %}{{ breadcrumbs['itens']['label'] }}{% endblock %}
+
+{% block links %}
+
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <table id="lista_encomendas" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Data</th>
+              <th>Status</th>
+              <th>Envio</th>
+              <th>Pagamento</th>
+              <th>Total</th>
+              <th class="no-sort"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/loja/loja_compra.js"></script>
+ 
+{% endblock %}

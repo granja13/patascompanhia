@@ -1,0 +1,109 @@
+{% extends "template.twig" %}
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block links %} 
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-body">
+                    {% if error != "" %}
+                        <div class="alert alert-danger">
+                            <a class="close" data-dismiss="alert" style="float: right;">
+                                &times;
+                            </a>
+                            Erro a inserir nova encomenda!
+                        </div>
+                    {% endif %}
+                    {% if success != "" %}
+                        <div class="alert alert-success">
+                            <a class="close" data-dismiss="alert" style="float: right;">
+                                &times;
+                            </a>
+                            Inserido nova Encomenda!
+                        </div>
+                    {% endif %}
+                <div class="mb-3">
+                    <button class="btn btn-primary" onclick="abrirModal()">Adicionar Venda</button>
+                </div>
+
+                <table id="lista_vendas_detalhe" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unitário (€)</th>
+                            <th>Total (€)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venda in vendas %}
+                            <tr>
+                                <td>{{ venda.data_venda }}</td>
+                                <td>{{ venda.cliente }}</td>
+                                <td>{{ venda.produto }}</td>
+                                <td>{{ venda.quantidade }}</td>
+                                <td>{{ venda.preco | number_format(2, ',', '.') }}</td>
+                                <td>{{ (venda.quantidade * venda.preco) | number_format(2, ',', '.') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Modal de Adicionar Venda -->
+                <div class="modal fade" id="modalVenda" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Adicionar Venda</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <form method="POST" action="{{ site_url }}report_vendas_detalhe.php?mes={{ mes }}">
+                                <div class="modal-body">
+                                    <label>Cliente:</label>
+                                    <input type="text" name="cliente" class="form-control" required><br>
+                                    <label>Produto:</label>
+                                    <input type="text" name="produto" class="form-control" required><br>
+                                    <label>Quantidade:</label>
+                                    <input type="number" name="quantidade" class="form-control" required><br>
+                                    <label>Preço (€):</label>
+                                    <input type="text" name="preco" class="form-control" required><br>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/reports/report_vendas_detalhe.js"></script>
+
+     <script type="text/javascript">
+
+    function abrirModal(){
+        $('#modalVenda').modal('show');
+    }
+    </script>
+{% endblock %}

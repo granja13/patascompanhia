@@ -1,0 +1,141 @@
+{% extends "template.twig" %}
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Encomenda</h3>
+                        </div>
+                        <div class="card-body table-responsive p-0" style="height: 100%">
+                            <form action="" role="form" method="GET">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="order">ID Encomenda:</label>
+                                        <input type="text" class="form-control" placeholder="ID Encomenda" id="order" name="order" value="" autocomplete="off">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><small>{{ result_total_clientes[0].total_clientes ?? '0' }}</small></h3>
+                                    <p>Clientes</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><small>0</small></h3>
+                                    <p>Clientes Newsletter</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><small>{{ result_total_encomendas[0].total_encomendas ?? '0' }}</small></h3>
+                                    <p>Encomendas</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>{{ result_total_novos[0].total_clientes_hoje ?? '0' }}</h3>
+                                    <p>Clientes Novos</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-paper-plane"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Gerar Referência</h3>
+                        </div>
+                        <form action="" role="form" method="post">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="ord">ID</label>
+                                    <input type="text" name="ord" class="form-control" placeholder="ID" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="valor">Valor</label>
+                                    <input type="text" name="valor" class="form-control" placeholder="Valor" value="">
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-primary">Gerar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Enviar Newsletter</h3>
+                        </div>
+                        <form action="" role="form" method="post">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="numero">ID Template</label>
+                                    <input type="text" name="numero" class="form-control" placeholder="Numero" value="">
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/clientes/clientes_lista.js"></script>
+{% endblock %}

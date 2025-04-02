@@ -1,0 +1,264 @@
+{% extends "geral.twig" %}
+
+{% block conteudo %}
+    <div class="home-slides owl-carousel owl-theme">
+        <div class="banner-item">
+            <div class="banner-item-content">
+                <img src="{{ site_url }}public/assets/img/banner/teste.jpg" alt="Banner 1"></div>
+            </div>
+            <div class="banner-item">
+                <div class="banner-item-content">
+                    <img src="{{ site_url }}public/assets/img/banner/teste.jpg" alt="Banner 2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offer-area pt-100 pb-75">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-4 col-md-4 col-lg-2">
+                    <div class="single-categories-box">
+                        <a href="shop-grid.html" class="d-block">
+                            <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                <h3>
+                                    Cão
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-4 col-lg-2">
+                        <div class="single-categories-box">
+                            <a href="shop-grid.html" class="d-block">
+                                <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                    <h3>
+                                        Gato
+                                    </h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4 col-lg-2">
+                            <div class="single-categories-box">
+                                <a href="shop-grid.html" class="d-block">
+                                    <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                        <h3>
+                                            Roedor
+                                        </h3>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-4 col-lg-2">
+                                <div class="single-categories-box">
+                                    <a href="shop-grid.html" class="d-block">
+                                        <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                            <h3>
+                                                Ave
+                                            </h3>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-4 col-lg-2">
+                                    <div class="single-categories-box">
+                                        <a href="shop-grid.html" class="d-block">
+                                            <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                                <h3>
+                                                    Peixe
+                                                </h3>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-4 col-lg-2">
+                                        <div class="single-categories-box">
+                                            <a href="shop-grid.html" class="d-block">
+                                                <img src="{{ site_url }}public/assets/img/categorias/cao.png" alt="categories-image">
+                                                    <h3>
+                                                        Réptil
+                                                    </h3>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="products-area pb-75">
+        <div class="container">
+            <div class="section-title">
+                <h2>
+                    Produtos em destaque
+                </h2>
+            </div>
+            <div class="row justify-content-center d-none d-md-flex">
+                {% for indice, produto in produtos %}
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-products-box">
+                            <div class="image">
+                                <a href="produto-detalhe.php?id={{ produto.referencia }}" class="d-block">
+                                    <img src="{{ site_url }}public/assets/imagens/produtos/{{ produto.img }}" alt="products-image"></a>
+                                    {% if produto.desconto != 0 %}
+                                        <span class="on-sale">
+                                            {{ produto.desconto }}
+                                            %
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <div class="content" style="text-align: center;">
+                                    <h3>
+                                        <a href="produto-detalhe.php?id={{ produto.referencia }}">
+                                            {{ produto.nome }}
+                                        </a>
+                                    </h3>
+                                    <div class="price">
+                                        <span style="font-size: 14px;">
+                                            Desde
+                                        </span>
+                                        <br>
+                                            {% if produto.old_preco == 0 %}
+                                                <span class="new-price" style="font-size: 18px; color: #D2B48C;">
+                                                    <strong>
+                                                        {{ produto.preco }}
+                                                        €
+                                                    </strong>
+                                                </span>
+                                            {% else %}
+                                                <span class="old-price" style="font-size: 18px;">
+                                                    {{ produto.preco }}
+                                                    €
+                                                </span>
+                                                <span class="new-price" style="font-size: 18px; color: #D2B48C;">
+                                                    <strong>
+                                                        {{ produto.old_preco }}
+                                                        €
+                                                    </strong>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div id="productsCarousel" class="carousel slide d-md-none" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for indice, produto in produtos %}
+                                {% if indice % 2 == 0 %}
+                                    <div class="carousel-item {% if indice == 0 %}active{% endif %}">
+                                        <div class="row">
+                                        {% endif %}
+                                        <div class="col-6">
+                                            <div class="single-products-box">
+                                                <div class="image">
+                                                    <a href="produto-detalhe.php?id={{ produto.referencia }}" class="d-block">
+                                                        <img src="{{ site_url }}public/assets/imagens/produtos/{{ produto.img }}" alt="products-image"></a>
+                                                        {% if produto.desconto != 0 %}
+                                                            <span class="on-sale">
+                                                                {{ produto.desconto }}
+                                                                %
+                                                            </span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="content" style="text-align: center;">
+                                                        <h3>
+                                                            <a href="produto-detalhe.php?id={{ produto.referencia }}">
+                                                                {{ produto.nome }}
+                                                            </a>
+                                                        </h3>
+                                                        <div class="price">
+                                                            {% if produto.old_preco == 0 %}
+                                                                <span class="new-price">
+                                                                    {{ produto.preco }}
+                                                                    €
+                                                                </span>
+                                                            {% else %}
+                                                                <span class="new-price">
+                                                                    {{ produto.preco }}
+                                                                    €
+                                                                </span>
+                                                                <span class="old-price">
+                                                                    {{ produto.old_preco }}
+                                                                    €
+                                                                </span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if indice % 2 == 1 or loop.last %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+                            <a class="carousel-control-prev" href="#productsCarousel" role="button" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">
+                                    Previous
+                                </span>
+                            </a>
+                            <a class="carousel-control-next" href="#productsCarousel" role="button" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">
+                                    Next
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offer-area pb-75">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="single-offer-box">
+                        <a href="shop-grid.html" class="d-block">
+                            <img src="{{ site_url }}public/assets/imagens/anuncios/Banner-Stock-Off-1.jpg" alt="offer-image"></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-offer-box">
+                            <a href="shop-grid.html" class="d-block">
+                                <img src="{{ site_url }}public/assets/imagens/anuncios/Banner-Stock-Off-1.jpg" alt="offer-image"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offer-area pb-75">
+        <div class="container">
+            <div class="single-offer-box">
+                <a href="shop-grid.html" class="d-block">
+                    <img src="{{ site_url }}public/assets/img/teste.jpg" alt="offer-image"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="brands-area pb-75">
+        <div class="container">
+            <div class="categories-slides owl-carousel owl-theme">
+            {% for indice, marcas in anuncios_marca %}
+                <div class="single-brands-box" style="width: 50%;">
+                    <a href="shop-grid.html" class="d-block">
+                        <img src="{{ site_url }}public/assets/imagens/anuncios/{{ marcas.img }}" alt="{{ marcas.nome }}">
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

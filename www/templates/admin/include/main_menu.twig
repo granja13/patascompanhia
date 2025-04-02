@@ -1,0 +1,369 @@
+<aside id="main_menu" class="main-sidebar sidebar-dark-primary elevation-4" style="height: 100vh;">
+    <!-- Brand Logo -->
+    <a href="index.php" class="brand-link">
+        <img src="../../../www/public/assets/img/favicon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-light">BACKOFFICE</span>
+    </a>
+
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 pl-sm-3 d-flex">
+            <div class="image">
+                <img src="../../../www/public/admin/assets/img/avatar5.png" class="img-circle elevation-2" alt="{{ user_details.nome }}">
+            </div>
+            <div class="info">
+                <a href="cliente_edita.php?id={{ cliente_id }}"
+                   class="d-block">{{cliente_nome}}</a>
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li data-menu-item="home" class="nav-item">
+                    <a href="index.php"
+                       class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Página Inicial
+                        </p>
+                    </a>
+                </li>
+                {# Conteúdo #}
+                <li data-menu-item="conteudo" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Conteúdo
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="lista_paginas" class="nav-item">
+                            <a href="content_editor_list.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Páginas</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="top_bar" class="nav-item">
+                            <a href="top_bar_edita.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Top Bar</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="template_lojaonline" class="nav-item">
+                            <a href="template_lojaonline.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Template Site</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {# Clientes #}
+                <li data-menu-item="clientes" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Clientes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="lista" class="nav-item">
+                            <a href="clientes.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Listagem</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="sessoes" class="nav-item">
+                            <a href="clientes_sessoes.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sessões no Site</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {# Referral 
+                    <li data-menu-item="referral" class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>
+                                Afiliados
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li data-menu-sub-item="dashboard" class="nav-item">
+                                <a href="referral_dashboard.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Dashboard</p>
+                                </a>
+                            </li>
+                            <li data-menu-sub-item="list" class="nav-item">
+                                <a href="referrals.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Listagem</p>
+                                </a>
+                            </li>
+                            <li data-menu-sub-item="conditions" class="nav-item">
+                                <a href="referral_conditions.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Condições</p>
+                                </a>
+                            </li>
+                            <li data-menu-sub-item="settings" class="nav-item">
+                                <a href="referral_settings.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Configurações</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>#}
+                {# Loja Online #}
+                <li data-menu-item="loja_online" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-store"></i>
+                        <p>
+                            Loja Online
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="encomendas" class="nav-item">
+                            <a href="loja_compra.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Encomendas</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="carrinhos" class="nav-item">
+                            <a href="loja_carrinhos.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Carrinhos</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="portes" class="nav-item">
+                            <a href="loja_portes.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tarifas de portes</p>
+                            </a>
+                        </li>
+                        <!--<li data-menu-sub-item="paises" class="nav-item">
+                            <a href="loja_paises.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Países</p>
+                            </a>
+                        </li>-->
+                        <li data-menu-sub-item="meios_envio" class="nav-item">
+                            <a href="loja_meios_envio.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Meios de envio</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="meios_pag" class="nav-item">
+                            <a href="loja_meios_pag.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Meios de pagamento</p>
+                            </a>
+                        </li>
+                        <!--<li data-menu-sub-item="portes_calc" class="nav-item">
+                            <a href="loja_portescalc.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Portes/País/Meios envio/Tarifas</p>
+                            </a>
+                        </li>-->
+                    </ul>
+                </li>
+                {# Promoções #}
+                <li data-menu-item="promocoes" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-percent"></i>
+                        <p>
+                            Promoções
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="loja_0" class="nav-item ">
+                            <a href="loja_promocoes.php?tipo=0&pro=0" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vouchers</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="loja_1" class="nav-item ">
+                            <a href="loja_promocoes.php?tipo=0&pro=1" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Vouchers Usados</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                {# Catálogo #}
+                <li data-menu-item="catalogo" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                            Catálogo
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="produtos" class="nav-item">
+                            <a href="prods.php?pub=1" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Produtos</p>
+                            </a>
+                        </li>
+                        <!--<li data-menu-sub-item="produtos_conteudo" class="nav-item">
+                            <a href="prods_conteudo.php?pub=1" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Conteúdos de Produtos</p>
+                                <span class="new-feature badge badge-success">novo</span>
+                            </a>
+                        </li>-->
+                        <li data-menu-sub-item="marcas" class="nav-item">
+                            <a href="prods_marcas.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Marcas</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="categorias" class="nav-item">
+                            <a href="prods_categ.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="listas" class="nav-item">
+                            <a href="listas.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Stock Casa</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {# Anúncios #}
+                <li data-menu-item="anuncios" class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Anúncios
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li data-menu-sub-item="home" class="nav-item">
+                            <a href="anuncios.php?tipo=home" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Anúncios</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="banner" class="nav-item">
+                            <a href="anuncios.php?tipo=banner" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Banners</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="menu" class="nav-item">
+                            <a href="anuncios.php?tipo=menu" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Menu</p>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="category" class="nav-item">
+                            <a href="anuncios.php?tipo=category" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Marcas Confiança</p>
+                                <span class="new-feature badge badge-success">novo</span>
+                            </a>
+                        </li>
+                        <li data-menu-sub-item="mosaic" class="nav-item">
+                            <a href="anuncios.php?tipo=mosaic" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Mosaico</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {# Reports #}
+                    <li data-menu-item="reports" class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            <p>
+                                Reports
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li data-menu-sub-item="report_order" class="nav-item">
+                                <a href="report_order.php"
+                                   class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Encomendas</p>
+                                </a>
+                            </li>
+                            <li data-menu-sub-item="report_vendas" class="nav-item">
+                                <a href="report_vendas.php"
+                                   class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Vendas por Mes</p>
+                                    <span class="new-feature badge badge-success">novo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {# Emails 
+                    <li data-menu-item="emails" class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-envelope-open"></i>
+                            <p>
+                                Emails
+                                <i class="right fas fa-angle-left"></i>
+                                <span class="new-feature badge badge-success">novo</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li data-menu-sub-item="emails_all" class="nav-item">
+                                <a href="emails_gateway.php"
+                                   class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Todos</p>
+                                    <span class="new-feature badge badge-success">novo</span>
+                                </a>
+                            </li>
+                            <li data-menu-sub-item="report_emails" class="nav-item">
+                                <a href="report_emails.php"
+                                   class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Report Emails</p>
+                                    <span class="new-feature badge badge-success">novo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>#}
+                {# Logout #}
+                <li class="nav-item">
+                    <a href="logout.php"
+                       class="nav-link sign-out">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Sair
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+
+    <!-- /.sidebar -->
+</aside>
+
+<script>
+    document.querySelector('[data-menu-item="{{ breadcrumbs.ativar_menu.item }}"]').className += ' menu-open';
+    document.querySelector('[data-menu-item="{{ breadcrumbs.ativar_menu.item }}"] > a').className += ' active';
+    var menu_sub_item = document.querySelector('[data-menu-sub-item="{{ breadcrumbs.ativar_menu.sub_item }}"] a');
+    if (menu_sub_item) {
+        menu_sub_item.className += ' active';
+    }
+</script>

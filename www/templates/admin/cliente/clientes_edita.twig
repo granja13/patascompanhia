@@ -1,0 +1,292 @@
+{% extends "template.twig" %}
+{% block title %}{{ breadcrumbs['itens']['label'] }}{% endblock %}
+
+{% block links %}
+
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+    <form id="clienteForm" action="{{ site_url }}clientes_edita.php?id={{ dados_cliente.id is defined ? dados_cliente.id : '0' }}" method="POST" enctype="multipart/form-data">
+      <div class="card card-primary card-outline">
+          <div class="card-body">
+          <div class="content">
+                        <div class="cad-body">
+                            {% if success != "" %}
+                                <div class="alert alert-success">
+                                    <a class="close" data-dismiss="alert" style="float: right;">
+                                        &times;
+                                    </a>
+                                    Cliente atualizado com Sucesso!
+                                </div>
+                            {% endif %}
+                            {% if error != "" %}
+                            <div class="alert alert-danger">
+                                <a class="close" data-dismiss="alert" style="float: right;">
+                                    &times;
+                                </a>
+                                Erro ao guardar dados do cliente!
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+            <div class="col-12">
+              <div class="card card-tabs">
+                <div class="card-header p-0 pt-1 border-bottom-0">
+                  <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="main-tab" data-toggle="pill" href="#main" role="tab" aria-controls="main" aria-selected="true">Geral</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="utilizador-tab" data-toggle="pill" href="#conteudo" role="tab" aria-controls="conteudo" aria-selected="false">Utilizador</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="moradas-tab" data-toggle="pill" href="#imagem" role="tab" aria-controls="imagem" aria-selected="false">Moradas</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="encomendas-tab" data-toggle="pill" href="#precos" role="tab" aria-controls="precos" aria-selected="false">Encomendas</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body col-12">
+                  <div class="tab-content" id="custom-tabs-three-tabContent">
+                    <div class="tab-pane fade show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label for="referencia" class="col-md-4 col-form-label">ID</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control disabled-result" id="id" name="id" value="{{ dados_cliente.id }}" readonly>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="referencia" class="col-md-4 col-form-label">Nome</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control disabled-result" id="nome" name="nome" value="{{ dados_cliente.nome }}" readonly>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="referencia" class="col-md-4 col-form-label">Apelido</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control disabled-result" id="apelido" name="apelido" value="{{ dados_cliente.apelido }}" readonly>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="peso" class="col-md-4 col-form-label">Telemovel</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" id="telemovel" name="telemovel" value="{{ dados_cliente.telefone }}">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="pai" class="col-md-4 col-form-label">Nif</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" id="nif" name="nif" value="{{ dados_cliente.nif }}">
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="col-md-6" style="padding-top: 10px;">
+                            <div class="form-group row">
+                              <label for="referencia" class="col-md-4 col-form-label">Data Criação</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control disabled-result" id="data_criacao" name="data_criacao" value="{{ dados_cliente.data_criacao }}" disabled="">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="stock_casa" class="col-md-4 col-form-label">Data Modificação</label>
+                              <div class="col-md-4">
+                                <input type="text" class="form-control" id="data_modificacao" name="data_modificacao" value="{{ dados_cliente.data_modificacao }}" disabled="">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {# Utilizador Tab #}
+                    <div class="tab-pane fade" id="conteudo" role="tabpanel" aria-labelledby="utilizador-tab">
+                      <div class="container-fluid">
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Nome</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="nome" name="nome" value="{{ dados_cliente.nome is defined ? dados_cliente.nome : '' }}" readonly>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Password</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="password" name="password" value="{{ dados_cliente.password is defined ? dados_cliente.password : '' }}">
+                                <span>Apenas se quiser alterar</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="perms" class="col-sm-3 col-form-label">Permissões</label>
+                              <div class="col-sm-8">
+                                <select class="form-control" id="perms" name="perms">
+                                  <option value="1" {{ dados_cliente.perms is defined and dados_cliente.perms == 1 ? 'selected' : '' }}>Público</option>
+                                  <option value="255" {{ dados_cliente.perms is defined and dados_cliente.perms == 255 ? 'selected' : '' }}>Administrador</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Nº logins</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="logins" name="logins" value="{{ dados_cliente.logins is defined ? dados_cliente.logins : '' }}" readonly>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Ultimo Login</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="last_login" name="last_login" value="{{ dados_cliente.last_login is defined ? dados_cliente.last_login : '' }}" readonly>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Ultimo IP</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="last_ip" name="last_ip" value="{{ dados_cliente.last_ip is defined ? dados_cliente.last_ip : '' }}" readonly>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-4">
+                            <div class="form-group row">
+                              <label for="nome" class="col-sm-3 col-form-label">Termos</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="termos" name="termos" value="{{ dados_cliente.termos is defined ? dados_cliente.termos : '' }}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    {# Moradas Tab #}
+                    <div class="tab-pane fade" id="imagem" role="tabpanel" aria-labelledby="moradas-tab">
+                      <div class="container-fluid">
+                        <div class="row" style="padding-top: 25px;">
+                          <div class="col-md-12">
+                            <table class="table table-bordered table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Nome</th>
+                                  <th>Rua</th>
+                                  <th>Nº Porta</th>
+                                  <th>Cidade</th>
+                                  <th>Cod Postal</th>
+                                  <th>Pais</th>
+                                  <th class="no-sort"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for morada in dados_cliente_morada %}
+                                  <tr>
+                                    <td>{{ morada.nome|e }}</td>
+                                    <td>{{ morada.rua|e }}</td>
+                                    <td>{{ morada.nr_porta|e }}</td>
+                                    <td>{{ morada.cidade|e }}</td>
+                                    <td>{{ morada.cod_postal|e }}</td>
+                                    <td>{{ morada.pais|e }}</td>
+                                    <td style="text-align: center;"><a href="clientes_edita_morada.php?id_morada={{ morada.id }}"><i class='fas fa-pencil-alt'></i></a></td>
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {# Encomendas Tab #}
+                    <div class="tab-pane fade" id="precos" role="tabpanel" aria-labelledby="encomendas-tab">
+                      {% for encomenda in encomendas_id %}
+                        <a href="loja_compra_edita.php?id={{ encomenda.id|e }}" style="display:block;">Encomenda - {{ encomenda.id|e }}</a>
+                      {% endfor %}
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+          <button type="button" class="btn btn-info" onclick="submitToMorada()">Guardar</button>
+        </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    {{ parent() }}
+
+    <script>
+      function submitToMorada() {
+          const form = document.getElementById('clienteForm');
+          form.action = '{{ site_url }}clientes_edita.php?id={{ dados_cliente.id is defined ? dados_cliente.id : '0' }}';
+          form.submit();
+      }
+
+  
+      $(document).ready(function() {
+        $('#descricao').summernote({
+          height: 200,
+          lang: 'pt-BR'
+        });
+      });
+    </script>
+
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/clientes/clientes_lista.js"></script>
+ 
+{% endblock %}

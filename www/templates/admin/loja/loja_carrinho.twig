@@ -1,0 +1,146 @@
+{% extends "template.twig" %}
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block links %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ site_url }}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary card-outline">
+            <div class="card-body">
+
+                
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+
+                            <th class="product-thumbnail">
+                                &nbsp;
+                            </th>
+                            <th class="product-qty-mobile">
+                                &nbsp;
+                            </th>
+                            <th class="product-name">
+                                Produto
+                            </th>
+                            <th class="product-price">
+                                Preço
+                            </th>
+                            <th class="product-quantity">
+                                Quantidade
+                            </th>
+                            <th class="product-subtotal">
+                                Total
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% if carrinho != "" %}
+                            {% for id,produto in carrinho %}
+                                <tr class="cart_table_item">
+
+                                    <td class="product-thumbnail">
+                                        {% if produto.imgs.imgs[0] %}
+                                            {% set img = produto.imgs.imgs[0] %}
+                                        {% else %}
+                                            {% set img = 'no.jpg' %}
+                                        {% endif %}
+                                        <a class="open-image-modal pull-left"
+                                           href=""
+                                           data-plugin-options='{% verbatim %}{"type":"image"}{% endverbatim %}'>
+                                            <img class="img-responsive" width="55"
+                                                 src="">
+                                        </a>
+
+                                    </td>
+                                    <td class="product-qty-mobile ">
+                                        {{ produto.qty }}X
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="/catalog/{{ produto.id_categ }}/{{ produto.id }}">{{ produto.nome }}</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <span class="amount pull-right">{{ produto.preco|number_format(2, '.', ',') }}&nbsp;€</span>
+                                    </td>
+                                    <td class="product-quantity">{{ produto.qty }}
+                                    </td>
+                                    <td class="product-subtotal">
+                                        <span class="amount pull-right">{{ produto.subtotal|number_format(2, '.', ',') }}&nbsp;€</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="cart_table_item">
+                                <td class="product-remove center" colspan="7"><h4>Não existem produtos no
+                                        carrinho</h4></td>
+                            </tr>
+                        {% endif %}
+
+
+                        </tbody>
+                  </table>
+                </div>
+                <div class="col-6">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody><tr>
+                        <th style="width:50%">Peso:</th>
+                        <td>5 KG</td>
+                      </tr>
+                      <tr>
+                        <th>Total:</th>
+                        <td>10€</td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                </div>
+                <br>
+                <h3>Promoções Aplicadas</h3>
+                <div class="col-12 table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th></th>
+                      <th>Nome</th>
+                      <th>Desconto</th>
+                      <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>1 X</td>
+                      <td>OFERTA PORTES</td>
+                      <td>0.00 €</td>
+                      <td>0.00€</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ site_url }}plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ site_url }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript" src="{{ site_url }}assets/js/loja/loja_carrinhos.js"></script>
+
+    <script type="text/javascript">
+
+    function abrirModal(){
+        $('#modalMes').modal('show');
+    }
+    </script>
+{% endblock %}
